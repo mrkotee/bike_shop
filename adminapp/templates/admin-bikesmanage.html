@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+	Admin_page{{block.super}}
+{% endblock %}
+
+
+{% block css %}
+<link href="{% static 'css/adminstyle.css' %}" rel="stylesheet" type="text/css" media="all" />
+{% endblock %}
+
+{% block content %}
+	{% if user.is_superuser %}
+	<h1>Bikes</h1>
+	<ul>
+		{% for bike in bike_list %}
+			<li class="adminitem">
+				<a href="product/bike/{{bike.id}}" target="blank" class="itemname">{{bike.name}}</a>
+				<a href="product/bike/edit/{{bike.id}}">Edit</a>
+				<a href="product/bike/delete/{{bike.id}}">Delete</a>	
+			</li>
+		{% empty %}
+			<li>No one bike here :(</li>
+		{% endfor %}
+	</ul>
+	<br>
+	<div class="pagination">
+    <span class="step-links">
+        {% if user_list.has_previous %}
+            <a href="?page={{ user_list.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ user_list.number }} of {{ user_list.paginator.num_pages }}.
+        </span>
+
+        {% if user_list.has_next %}
+            <a href="?page={{ user_list.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+	{% else %}
+		<p>YOU HAVE NO POWER HERE</p>
+	{% endif %}
+
+{% endblock %}
+

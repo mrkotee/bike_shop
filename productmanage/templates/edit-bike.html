@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+	EditBike{{block.super}}
+{% endblock %}
+
+{% block content %}
+	<form method="post" role="form" action="" class="ml-5">
+		{% csrf_token %}
+		<table>
+		    {{form.as_table}}
+		</table>
+        <input type="submit" value="Confirm edit">
+    </form>
+{% endblock %}

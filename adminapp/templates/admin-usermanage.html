@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+	Admin_page{{block.super}}
+{% endblock %}
+
+
+{% block css %}
+<link href="{% static 'css/adminstyle.css' %}" rel="stylesheet" type="text/css" media="all" />
+{% endblock %}
+
+{% block content %}
+	{% if user.is_superuser %}
+	<h1>Users</h1>
+	<ul>
+		{% for someuser in user_list %}
+			<li class="adminitem">
+				<a href="/user/{{someuser.id}}" target="blank" class="itemname">{{someuser|truncatechars_html:60}}</a>
+				<a href="/user/edit/{{user.id}}">Edit</a>
+				<a href="/user/delete/{{someuser.id}}">Delete</a>
+				<p>{{someuser.someuser|truncatechars_html:60}}</p>
+				
+			</li>
+		{% empty %}
+			<li>No one user here :(</li>
+		{% endfor %}
+	</ul>
+	<br>
+	<div class="pagination">
+    <span class="step-links">
+        {% if user_list.has_previous %}
+            <a href="?page={{ user_list.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ user_list.number }} of {{ user_list.paginator.num_pages }}.
+        </span>
+
+        {% if user_list.has_next %}
+            <a href="?page={{ user_list.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+	{% else %}
+		<p>YOU HAVE NO POWER HERE</p>
+	{% endif %}
+
+{% endblock %}
+

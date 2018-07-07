@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+
+
+{% block content %}
+<!-- <div id="cate" class="categories">
+	 <div class="container">
+		 <h3>CATEGORIES</h3>
+		 <div class="categorie-grids">
+			 <a href="{% url 'bicycles' %}"><div class="col-md-4 cate-grid grid1">
+				 <h4>FIXED / SINGLE SPEED</h4>
+				 <p>Are you ready for the 27.5 Revloution ?</p>
+				 <a class="store" href="{% url 'bicycles' %}">GO TO STORE</a>
+			 </div></a>
+			 <a href="{% url 'bicycles' %}"><div class="col-md-4 cate-grid grid2">
+				 <h4>PREMIMUM SERIES</h4>
+				 <p>Exclusive Bike Components</p>
+				 <a class="store" href="{% url 'bicycles' %}">GO TO STORE</a>
+			 </div></a>
+			 <a href="{% url 'bicycles' %}"><div class="col-md-4 cate-grid grid3">
+				 <h4>CITY BIKES</h4>
+				 <p>Street Playground</p>
+				 <a class="store" href="{% url 'bicycles' %}">GO TO STORE</a>
+			 </div></a>
+			 <div class="clearfix"></div>
+		 </div>
+	 </div>
+</div> -->
+<!--bikes-->
+<div class="bikes">	
+		 <h3>POPULAR BIKES</h3>
+		 <div class="bikes-grids">			 
+			 <ul id="flexiselDemo1">
+			 {% for bike in bike_list %}
+				 <li>
+					 <img src="{{ bike.img.all.0.image.url }}" alt=""/>
+					 <div class="bike-info">
+						 <div class="model">
+							 <a href="{% url 'single' bike.id %}"><h4>{{bike.name}}<span>${{bike.cost}}</span></h4></a>						 
+						 </div>
+						 <!-- <div class="model-info">
+						     <select>
+							  <option value="volvo">OPTION</option>
+							  <option value="saab">Option</option>
+							  <option value="opel">Option</option>
+							  <option value="audi">Option</option>
+							 </select>
+							 <a href="{% url 'bicycles' %}">BUY</a>
+						 </div>				 -->		 
+						 <div class="clearfix"></div>
+					 </div>
+					 <!-- <div class="viw">
+						<a href="{% url 'bicycles' %}">Quick View</a>
+					 </div> -->
+					 <div class="viw">
+						<a href="{% url 'single' bike.id %}">View</a>
+					 </div>
+				 </li>
+			{% endfor %}
+
+		    </ul>
+			<script type="text/javascript">
+			 $(window).load(function() {			
+			  $("#flexiselDemo1").flexisel({
+				visibleItems: 3,
+				animationSpeed: 1000,
+				autoPlay: true,
+				autoPlaySpeed: 3000,    		
+				pauseOnHover:true,
+				enableResponsiveBreakpoints: true,
+				responsiveBreakpoints: { 
+					portrait: { 
+						changePoint:480,
+						visibleItems: 1
+					}, 
+					landscape: { 
+						changePoint:640,
+						visibleItems: 2
+					},
+					tablet: { 
+						changePoint:768,
+						visibleItems: 3
+					}
+				}
+			});
+			});
+			</script>
+			<script type="text/javascript" src="{% static 'js/jquery.flexisel.js' %}"></script>			 
+	</div>
+</div>
+<!---->
+<div class="contact">
+	<div class="container">
+		<h3>CONTACT US</h3>
+		{% if not message_receved %}
+			<p>Please contact us for all inquiries and purchase options.</p>
+		{% else %}
+			<p>Your message receved! Thank You!</p>
+		{% endif %}
+		<form method="post" action="/sendmessage/">
+			{% csrf_token %}
+			<input type="text" name='name' placeholder="NAME" required="">
+			<input type="text" name='surname' placeholder="SURNAME" required="">			 
+			<input class="user" name='email' type="text" placeholder="USER@DOMAIN.COM" required=""><br>
+			<textarea name='message' placeholder="MESSAGE"></textarea>
+			<input type="submit" value="SEND">
+		</form>
+	</div>
+</div>
+<!---->
+{% endblock %}
+
+

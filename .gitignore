@@ -1,0 +1,12 @@
+.idea
+__init__.py
+__pycache__
+migrations
+*.sqlite3
+*.db
+deploy/
+files/
+*.jpg
+*.JPG
+*.jpeg
+fonts/

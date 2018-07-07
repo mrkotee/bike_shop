@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+	Admin_page{{block.super}}
+{% endblock %}
+
+
+{% block css %}
+<link href="{% static 'css/adminstyle.css' %}" rel="stylesheet" type="text/css" media="all" />
+{% endblock %}
+
+{% block content %}
+	{% if user.is_superuser %}
+	<h1>Messagelist</h1>
+	<ul>
+		{% for message in messages %}
+			<li class="adminitem">
+				<a href="/message/{{message.id}}" target="blank" class="itemname">{{message|truncatechars_html:60}}</a>
+				<a href="/message/delete/{{message.id}}">Delete</a>
+				<p>{{message.message|truncatechars_html:60}}</p>
+				
+			</li>
+		{% empty %}
+			<li>No one message here :(</li>
+		{% endfor %}
+	</ul>
+	<br>
+	<div class="pagination">
+    <span class="step-links">
+        {% if messages.has_previous %}
+            <a href="?page={{ messages.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ messages.number }} of {{ messages.paginator.num_pages }}.
+        </span>
+
+        {% if messages.has_next %}
+            <a href="?page={{ messages.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+	{% else %}
+		<p>YOU HAVE NO POWER HERE</p>
+	{% endif %}
+
+{% endblock %}
+

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+
+{% block title %}
+	{{username}}{{block.super}}
+{% endblock %}
+
+{% block content %}
+	<h1>You want delete</h1>
+	{% for name, value in dict.items %}
+		<p>{{name}}: {{value}}</p>
+	{% endfor %}
+	<form method="post">
+	    {% csrf_token %}
+	    <input type="submit" value="Yes" class='btn btn-danger'>
+	</form>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+
+{% block title %}
+	{{usertags.name}}{{block.super}}
+{% endblock %}
+
+{% block content %}
+	{% for name, value in usertags.items %}
+		<p>{{name}}: {{value}}</p>
+	{% endfor %}
+{% endblock %}

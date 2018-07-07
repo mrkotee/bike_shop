@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+	Admin_page{{block.super}}
+{% endblock %}
+
+
+{% block css %}
+<link href="{% static 'css/adminstyle.css' %}" rel="stylesheet" type="text/css" media="all" />
+{% endblock %}
+
+{% block content %}
+	{% if user.is_superuser %}
+	<h1><a href="users/">Userlist</a></h1>
+	<ul>
+		{% for user in users %}
+			<li class="adminitem">
+				<a href="/user/{{user.id}}" target="blank" class="itemname">{{user.username}}</a>
+				<a href="/user/edit/{{user.id}}">Edit</a>
+				<a href="/user/delete/{{user.id}}">Delete</a>
+				<!-- <button type="button" class="btn btn-default" aria-label="Edit">
+					edit
+				</button>
+				<button type="button" class="btn btn-default" aria-label="Delete">
+					delete
+				</button> -->
+				
+			</li>
+		{% empty %}
+			<li>No one user here :(</li>
+		{% endfor %}
+	</ul>
+	<br>
+
+	<h1><a href="bikes/">Bikes</a></h1>
+	<ul>
+		{% for bike in bikes %}
+			<li class="adminitem">
+				<a href="product/bike/{{bike.id}}" target="blank" class="itemname">{{bike.name}}</a>
+				<a href="product/bike/edit/{{bike.id}}">Edit</a>
+				<a href="product/bike/delete/{{bike.id}}">Delete</a>	
+			</li>
+		{% empty %}
+			<li>No one bike here :(</li>
+		{% endfor %}
+	</ul>
+	<br>
+
+	<h2><a href="messages/">Messagelist</a></h2>
+	<ul>
+		{% for message in messages %}
+			<li class="adminitem">
+				<a href="/message/{{message.id}}" target="blank" class="itemname">{{message|truncatechars_html:60}}</a>
+				<a href="/message/delete/{{message.id}}">Delete</a>
+				<p>{{message.message|truncatechars_html:60}}</p>
+				
+			</li>
+		{% empty %}
+			<li>No one message here</li>
+		{% endfor %}
+	</ul>
+	<br>
+
+	{% else %}
+		<p>YOU HAVE NO POWER HERE</p>
+		<img src="{% static 'images/no-power.jpg' %}" alt="">
+	{% endif %}
+
+{% endblock %}
+
