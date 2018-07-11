@@ -943,7 +943,7 @@ a.length{
 .btn_form{
 margin-top:2em;
 }
-.btn_form a {
+.btn_form button {
 	border: none;
 	outline: none;
 	display: inline-block;
@@ -958,7 +958,7 @@ margin-top:2em;
 	-o-transition: all 0.3s ease-in-out;
 	transition: all 0.3s ease-in-out;
 }
-.btn_form a:hover{
+.btn_form button:hover{
 	background:transparent;
 	border:1px solid #000;
 	color:#000;
@@ -1134,7 +1134,7 @@ p.qty {
 }
 .form-control {
   display: inline-block;
-  width: 13%;
+  width: 35%;
 }
 .cart h2{
 	font-size:1.5em;

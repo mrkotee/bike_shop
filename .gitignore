@@ -10,3 +10,4 @@ files/
 *.JPG
 *.jpeg
 fonts/
+venv/

@@ -17,7 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
-from mainapp.views import main, parts, bicycles, accessories, cart, single, send_message
+from mainapp.views import main, parts, bicycles, accessories, single, send_message
 
 
 urlpatterns = [
@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^bicycles/$', bicycles, name='bicycles'),
     url(r'^parts/$', parts, name='parts'),
     url(r'^accessories/$', accessories, name='accessories'),
-    url(r'^cart/$', cart, name='cart'),
+    url(r'^cart/', include('cart.urls')),
     url(r'^single/(\d+)$', single, name='single'),
     url(r'^sendmessage/$', send_message),
     url(r'^user/', include('usermanage.urls')),

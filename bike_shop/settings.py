@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'q+$i*+7jn0q$(t$-0&_==iyg_t=sy8f^8j5t#xree%+)j=h8am'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['194.87.92.137', 'www.evsey.pw', 'evsey.pw']
+# ALLOWED_HOSTS = ['194.87.92.137', 'www.evsey.pw', 'evsey.pw']
 
 
 # Application definition
@@ -37,10 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'easycart',
     'mainapp',
     'usermanage',
     'adminapp',
 ]
+
+EASYCART_CART_CLASS = 'cart.views.Cart'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -70,6 +73,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'easycart.context_processors.cart',
             ],
         },
     },
